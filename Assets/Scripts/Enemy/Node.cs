@@ -9,7 +9,7 @@ namespace Tonhex
         public LayerMask obstacleLayer;
         public List<Vector2> availableDirections { get; private set; }
 
-        private void Start()
+        void Start()
         {
             availableDirections = new List<Vector2>();
 

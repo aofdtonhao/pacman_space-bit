@@ -10,13 +10,13 @@ namespace Tonhex
         public SpriteRenderer spriteRenderer { get; private set; }
         public new Collider2D collider { get; private set; }
 
-        private void Awake()
+        void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
             collider = GetComponent<Collider2D>();
         }
 
-        private void Update()
+        void Update()
         {
             // Set the new direction based on the current input
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {

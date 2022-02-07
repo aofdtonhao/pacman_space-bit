@@ -10,7 +10,7 @@ namespace Tonhex
 
         protected override void Eat()
         {
-            FindObjectOfType<GameManager>().PowerPelletEaten(this);
+            GameManager.instance.PowerPelletEaten(this);
         }
 
     }

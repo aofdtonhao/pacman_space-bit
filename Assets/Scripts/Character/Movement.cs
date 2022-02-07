@@ -17,13 +17,13 @@ namespace Tonhex
         public Vector2 nextDirection { get; private set; }
         public Vector3 startingPosition { get; private set; }
 
-        private void Awake()
+        void Awake()
         {
             rigidbody = GetComponent<Rigidbody2D>();
             startingPosition = transform.position;
         }
 
-        private void Start()
+        void Start()
         {
             ResetState();
         }
@@ -38,7 +38,7 @@ namespace Tonhex
             enabled = true;
         }
 
-        private void Update()
+        void Update()
         {
             // Try to move in the next direction while it's queued to make movements
             // more responsive

@@ -1195,6 +1195,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a48b74cb0ca0b0c4fbf0d83bf7737601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicAudioSource: {fileID: 519420033}
+  effectAudioSource: {fileID: 519420030}
+  lowPitchRange: 0.95
+  highPitchRange: 1.05
 --- !u!1 &525502341
 GameObject:
   m_ObjectHideFlags: 0

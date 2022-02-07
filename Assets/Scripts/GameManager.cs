@@ -6,6 +6,8 @@ using Tonhex;
 public class GameManager : MonoBehaviour
 {
 
+    public static GameManager instance { get; private set; } = null;
+
     public Ghost[] ghosts;
     public Pacman pacman;
     public Transform pellets;
@@ -18,12 +20,23 @@ public class GameManager : MonoBehaviour
     public int score { get; private set; }
     public int lives { get; private set; }
 
-    private void Start()
+    void Awake()
+    {
+        if (instance == null) {
+            instance = this;
+        } else if (instance != this) {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
     {
         NewGame();
     }
 
-    private void Update()
+    void Update()
     {
         if (lives <= 0 && Input.anyKey) {
             NewGame();

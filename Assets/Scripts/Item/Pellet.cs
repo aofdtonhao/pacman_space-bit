@@ -9,7 +9,7 @@ namespace Tonhex
 
         protected virtual void Eat()
         {
-            FindObjectOfType<GameManager>().PelletEaten(this);
+            GameManager.instance.PelletEaten(this);
         }
 
         private void OnTriggerEnter2D(Collider2D other)

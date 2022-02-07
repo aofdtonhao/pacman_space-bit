@@ -14,7 +14,7 @@ namespace Tonhex
         public Transform target;
         public int points = 200;
 
-        private void Awake()
+        void Awake()
         {
             //home = GetComponent<GhostHome>();
             //scatter = GetComponent<GhostScatter>();
@@ -22,7 +22,7 @@ namespace Tonhex
             //frightened = GetComponent<GhostFrightened>();
         }
 
-        private void Start()
+        void Start()
         {
             ResetState();
         }
@@ -57,11 +57,11 @@ namespace Tonhex
             if (collision.gameObject.layer == LayerMask.NameToLayer("Pacman")) {
                 /*if (frightened.enabled)
                 {
-                    FindObjectOfType<GameManager>().GhostEaten(this);
+                    GameManager.instance.GhostEaten(this);
                 }
                 else*/
                 {
-                    FindObjectOfType<GameManager>().PacmanEaten();
+                    GameManager.instance.PacmanEaten();
                 }
             }
         }
