@@ -5,16 +5,12 @@ public class MainUIController : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("Awake()");    
+        Debug.Log("MainUIController::Awake()");
     }
 
     void Start()
     {
-        Debug.Log("Start()");
-    }
-
-    void Update() {
-        Debug.Log("Update()");
+        Debug.Log("MainUIController::Start()");
     }
 
 }
