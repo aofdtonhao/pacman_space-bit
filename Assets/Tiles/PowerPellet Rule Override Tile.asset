@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-94844310470943417
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+  m_Name: Pellet Rule Tile (Override)
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: 0}
+  m_DefaultGameObject: {fileID: 3095018595238713430, guid: 1ad90c70951a2174cb7e7d96354bacc4, type: 3}
+  m_DefaultColliderType: 0
+  m_TilingRules: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c779848d9dd029409ca676b49e10a18, type: 3}
+  m_Name: PowerPellet Rule Override Tile
+  m_EditorClassIdentifier: 
+  m_Tile: {fileID: 11400000, guid: f742d2dfc43df02438395dc3d5f30f97, type: 2}
+  m_Sprites: []
+  m_GameObjects:
+  - m_OriginalGameObject: {fileID: 2816086047531638419, guid: c095cb6ad2e6a234fa20d463453d3f95, type: 3}
+    m_OverrideGameObject: {fileID: 3095018595238713430, guid: 1ad90c70951a2174cb7e7d96354bacc4, type: 3}
+  m_InstanceTile: {fileID: -94844310470943417}
