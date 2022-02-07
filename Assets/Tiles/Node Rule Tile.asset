@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
-  m_Name: Pellet Rule Tile
+  m_Name: Node Rule Tile
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 21300000, guid: de2959d5841f3b744b32dfea7d5d370d, type: 3}
-  m_DefaultGameObject: {fileID: 2816086047531638419, guid: c095cb6ad2e6a234fa20d463453d3f95, type: 3}
-  m_DefaultColliderType: 0
+  m_DefaultSprite: {fileID: 21300000, guid: c66408008572e2945b9949f7c7f23510, type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 1
   m_TilingRules: []

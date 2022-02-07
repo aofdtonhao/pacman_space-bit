@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: Pellet Rule Tile (Override)
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 0}
+  m_DefaultSprite: {fileID: 21300000, guid: 7412f33557d47544e8af693e4ad7400d, type: 3}
   m_DefaultGameObject: {fileID: 3095018595238713430, guid: 1ad90c70951a2174cb7e7d96354bacc4, type: 3}
   m_DefaultColliderType: 0
   m_TilingRules: []
@@ -29,7 +29,9 @@ MonoBehaviour:
   m_Name: PowerPellet Rule Override Tile
   m_EditorClassIdentifier: 
   m_Tile: {fileID: 11400000, guid: f742d2dfc43df02438395dc3d5f30f97, type: 2}
-  m_Sprites: []
+  m_Sprites:
+  - m_OriginalSprite: {fileID: 21300000, guid: de2959d5841f3b744b32dfea7d5d370d, type: 3}
+    m_OverrideSprite: {fileID: 21300000, guid: 7412f33557d47544e8af693e4ad7400d, type: 3}
   m_GameObjects:
   - m_OriginalGameObject: {fileID: 2816086047531638419, guid: c095cb6ad2e6a234fa20d463453d3f95, type: 3}
     m_OverrideGameObject: {fileID: 3095018595238713430, guid: 1ad90c70951a2174cb7e7d96354bacc4, type: 3}
