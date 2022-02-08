@@ -3,23 +3,20 @@ using UnityEngine;
 namespace Tonhex
 {
 
-    public class Ghost : Enemy
+    public class Ghost : Enemy, IScorable
     {
 
-        //public GhostHome home { get; private set; }
-        //public GhostScatter scatter { get; private set; }
-        //public GhostChase chase { get; private set; }
-        //public GhostFrightened frightened { get; private set; }
-        //public GhostBehavior initialBehavior;
-        public Transform target;
-        public int points = 200;
+        public const string WHITE_ANIMATION = "White";
+        public const string BLUE_ANIMATION = "Blue";
+
+        public GhostFrightened frightened { get; private set; }
+        // TODO: public GhostPrison prison { get; private set; }
+
+        public int scorePoints { get; set; }
 
         void Awake()
         {
-            //home = GetComponent<GhostHome>();
-            //scatter = GetComponent<GhostScatter>();
-            //chase = GetComponent<GhostChase>();
-            //frightened = GetComponent<GhostFrightened>();
+            Debug.Log("Ghost::Awake() - TODO");
         }
 
         void Start()
@@ -31,39 +28,29 @@ namespace Tonhex
         {
             gameObject.SetActive(true);
             movement.ResetState();
-
-            /*frightened.Disable();
-            chase.Disable();
-            scatter.Enable();
-
-            if (home != initialBehavior) {
-                home.Disable();
-            }
-
-            if (initialBehavior != null) {
-                initialBehavior.Enable();
-            }*/
         }
 
         public void SetPosition(Vector3 position)
         {
-            // Keep the z-position the same since it determines draw depth
             position.z = transform.position.z;
             transform.position = position;
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("Pacman")) {
-                /*if (frightened.enabled)
-                {
-                    GameManager.instance.GhostEaten(this);
-                }
-                else*/
-                {
-                    GameManager.instance.PacmanEaten();
+            if (collision.gameObject.layer == GameManager.Instance.playerLayer.value) {
+                if (frightened.enabled) {
+                    GameManager.Instance.GhostEaten(this);
+                } else {
+                    GameManager.Instance.PacmanDeath();
                 }
             }
+        }
+
+        public void Scored()
+        {
+            // ghost.SetPosition(ghost.home.inside.position);
+            // ghost.home.Enable(duration);
         }
 
     }

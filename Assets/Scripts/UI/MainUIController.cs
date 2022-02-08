@@ -1,16 +1,21 @@
 using UnityEngine;
 
-public class MainUIController : MonoBehaviour
+namespace Tonhex
 {
 
-    void Awake()
+    public class MainUIController : MonoBehaviour
     {
-        Debug.Log("MainUIController::Awake()");
-    }
 
-    void Start()
-    {
-        Debug.Log("MainUIController::Start()");
+        void Awake()
+        {
+            Debug.Log("MainUIController::Awake() - TODO");
+        }
+
+        void Start()
+        {
+            Debug.Log("MainUIController::Start() - TODO");
+        }
+
     }
 
 }

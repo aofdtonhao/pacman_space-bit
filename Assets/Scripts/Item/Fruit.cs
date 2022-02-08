@@ -8,12 +8,12 @@ namespace Tonhex
 
         void Awake()
         {
-            Debug.Log("Fruit::Awake()");
+            Debug.Log("Fruit::Awake() - TODO");
         }
 
         void Start()
         {
-            Debug.Log("Fruit::Start()");
+            Debug.Log("Fruit::Start() - TODO");
         }
 
     }

@@ -1,5 +1,3 @@
-// using UnityEngine;
-
 namespace Tonhex
 {
 
@@ -10,7 +8,7 @@ namespace Tonhex
 
         protected override void Eat()
         {
-            GameManager.instance.PowerPelletEaten(this);
+            GameManager.Instance.PowerPelletEaten(this);
         }
 
     }

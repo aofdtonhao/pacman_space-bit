@@ -5,16 +5,16 @@ namespace Tonhex
     public class Pellet : Item
     {
 
-        public int points = 10;
+        public LayerMask playerLayer;
 
         protected virtual void Eat()
         {
-            GameManager.instance.PelletEaten(this);
+            GameManager.Instance.PelletEaten(this);
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Pacman")) {
+            if (other.gameObject.layer == playerLayer.value) {
                 Eat();
             }
         }

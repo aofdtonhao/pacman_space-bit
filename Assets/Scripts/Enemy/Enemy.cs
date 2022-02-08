@@ -6,14 +6,16 @@ namespace Tonhex
     public class Enemy : Character
     {
 
+        public Transform target;
+
         void Awake()
         {
-            Debug.Log("Enemy::Awake()");
+            Debug.Log("Enemy::Awake() - TODO");
         }
 
         void Start()
         {
-            Debug.Log("Enemy::Start()");
+            Debug.Log("Enemy::Start() - TODO");
         }
 
     }
