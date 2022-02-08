@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2229669796342775815, guid: c095cb6ad2e6a234fa20d463453d3f95, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2816086047531638419, guid: c095cb6ad2e6a234fa20d463453d3f95, type: 3}
       propertyPath: m_Name
       value: PowerPellet
@@ -67,5 +71,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -2229669796342775815, guid: c095cb6ad2e6a234fa20d463453d3f95, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c095cb6ad2e6a234fa20d463453d3f95, type: 3}
+--- !u!1 &3095018595238713430 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2816086047531638419, guid: c095cb6ad2e6a234fa20d463453d3f95, type: 3}
+  m_PrefabInstance: {fileID: 1001778601909028549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6974904214501316297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3095018595238713430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11bcdc945f18c0547bd03f94b73916d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 50
+  duration: 8
