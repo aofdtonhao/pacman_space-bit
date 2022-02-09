@@ -7,7 +7,7 @@ namespace Tonhex
     public class Item : MonoBehaviour, IScorable
     {
 
-        public int scorePoints { get; set; }
+        public int ScorePoints { get; set; }
 
         void Awake()
         {

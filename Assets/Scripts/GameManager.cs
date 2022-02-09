@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 using Tonhex;
 
@@ -12,13 +11,11 @@ public class GameManager : MonoBehaviour
     public Pacman pacman;
     public Transform pellets;
 
-    // TODO
-    //public Text gameOverText;
-    //public Text scoreText;
-    //public Text livesText;
+    [SerializeField]
+    private MainUIController mainUIController;
 
-    public LayerMask mazeLayer { get; private set; }
-    public LayerMask playerLayer { get; private set; }
+    public LayerMask mazeLayer;
+    public LayerMask playerLayer;
 
     public int ghostMultiplier { get; private set; } = 1;
     public int score { get; private set; }
@@ -56,7 +53,7 @@ public class GameManager : MonoBehaviour
 
     private void NewRound()
     {
-        // TODO: gameOverText.enabled = false;
+        // TODO: mainUIController.gameOverText.enabled = false;
         Debug.Log("GameManager::NewRound()");
 
         foreach (Transform pellet in pellets) {
@@ -77,7 +74,7 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        // TODO: gameOverText.enabled = true;
+        // TODO: mainUIController.gameOverText.enabled = true;
         Debug.Log("GAME OVER");
 
         for (int i = 0; i < ghosts.Length; i++) {
@@ -90,19 +87,21 @@ public class GameManager : MonoBehaviour
     private void SetLives(int lives)
     {
         this.lives = lives;
-        // TODO: livesText.text = "x" + lives.ToString();
+        // TODO: mainUIController.lifeText.text = "x" + lives.ToString();
         Debug.Log("x" + lives.ToString());
     }
 
     private void SetScore(int score)
     {
         this.score = score;
-        // TODO: scoreText.text = score.ToString().PadLeft(2, '0');
+        // TODO: mainUIController.scoreText.text = score.ToString().PadLeft(2, '0');
         Debug.Log(score.ToString().PadLeft(2, '0'));
     }
 
     public void PacmanDeath()
     {
+        AudioManager.Instance.PlayEffect(AudioManager.Instance.PlayerDeathEffectAudioClip);
+
         pacman.DeathSequence();
 
         SetLives(lives - 1);
@@ -116,17 +115,23 @@ public class GameManager : MonoBehaviour
 
     public void GhostEaten(Ghost ghost)
     {
-        int points = ghost.scorePoints * ghostMultiplier;
+        AudioManager.Instance.PlayEffect(AudioManager.Instance.EatGhostEffectAudioClip);
+
+        int points = ghost.ScorePoints * ghostMultiplier;
         SetScore(score + points);
 
         ghostMultiplier++;
     }
 
-    public void PelletEaten(Pellet pellet)
+    public void PelletEaten(Pellet pellet, bool playAudio = true)
     {
+        if (playAudio) {
+            AudioManager.Instance.PlayEffectSequence(AudioManager.Instance.PalletEffectAudioClips);
+        }
+
         pellet.gameObject.SetActive(false);
 
-        SetScore(score + pellet.scorePoints);
+        SetScore(score + pellet.ScorePoints);
 
         if (!HasRemainingPellets()) {
             pacman.gameObject.SetActive(false);
@@ -137,10 +142,13 @@ public class GameManager : MonoBehaviour
     public void PowerPelletEaten(PowerPellet pellet)
     {
         for (int i = 0; i < ghosts.Length; i++) {
-            ghosts[i].frightened.Enable(pellet.duration);
+            ghosts[i].Frightened.Enable(pellet.duration);
         }
 
-        PelletEaten(pellet);
+        AudioManager.Instance.PlayEffect(AudioManager.Instance.PowerPalletEffectAudioClip);
+
+        PelletEaten(pellet, false);
+
         CancelInvoke(nameof(ResetGhostMultiplier));
         Invoke(nameof(ResetGhostMultiplier), pellet.duration);
     }

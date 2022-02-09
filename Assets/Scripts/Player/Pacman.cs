@@ -8,7 +8,7 @@ namespace Tonhex
 
         public SpriteRenderer spriteRenderer { get; private set; }
         public new Collider2D collider { get; private set; }
-        
+
         private Animator animator;
 
         void Awake()

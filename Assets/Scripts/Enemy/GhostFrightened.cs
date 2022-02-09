@@ -3,77 +3,58 @@ using UnityEngine;
 namespace Tonhex
 {
 
-    [RequireComponent(typeof(Ghost))]
-    public class GhostFrightened : EnemyBehavior
+
+    public class GhostFrightened : GhostBehaviour
     {
 
-        public SpriteRenderer body;
-        public SpriteRenderer eyes;
-        public SpriteRenderer blue;
-        public SpriteRenderer white;
+        public const string ANIMATION_BOOL_FLASH = "Flash";
 
-        public Ghost ghost { get; private set; }
+        public const float SPEED_MULTIPLIER_DEFAULT = 1f;
+        public const float SPEED_MULTIPLIER_FLASH = SPEED_MULTIPLIER_DEFAULT / 2f;
 
-        public bool eaten { get; private set; }
+        public bool IsEaten { get; private set; }
+
+        private Animator animator;
+
+        void Awake()
+        {
+            animator = GetComponent<Animator>();
+        }
 
         public override void Enable(float duration)
         {
             base.Enable(duration);
 
-            body.enabled = false;
-            eyes.enabled = false;
-            blue.enabled = true;
-            white.enabled = false;
-
-            Invoke(nameof(Flash), duration / 2f);
+            // TODO: animator.SetBool(ANIMATION_BOOL_FLASH, true);
         }
 
         public override void Disable()
         {
             base.Disable();
 
-            body.enabled = true;
-            eyes.enabled = true;
-            blue.enabled = false;
-            white.enabled = false;
-        }
-
-        private void Start()
-        {
-            ghost = (Ghost)enemy;
+            // TODO: animator.SetBool(ANIMATION_BOOL_FLASH, false);
         }
 
         private void Eaten()
         {
-            eaten = true;
+            IsEaten = true;
+
             ghost.Scored();
 
-            body.enabled = false;
-            eyes.enabled = true;
-            blue.enabled = false;
-            white.enabled = false;
-        }
-
-        private void Flash()
-        {
-            if (!eaten) {
-                blue.enabled = false;
-                white.enabled = true;
-                white.GetComponent<Animator>().SetBool(Ghost.WHITE_ANIMATION, true);
-            }
+            // TODO: animator.SetBool(Character.ANIMATION_BOOL_DEATH, true);
         }
 
         void OnEnable()
         {
-            blue.GetComponent<Animator>().SetBool(Ghost.BLUE_ANIMATION, true);
-            enemy.movement.speedMultiplier = 0.5f;
-            eaten = false;
+            enemy.movement.speedMultiplier = SPEED_MULTIPLIER_FLASH;
+
+            IsEaten = false;
         }
 
         void OnDisable()
         {
-            enemy.movement.speedMultiplier = 1f;
-            eaten = false;
+            enemy.movement.speedMultiplier = SPEED_MULTIPLIER_DEFAULT;
+            IsEaten = false;
         }
 
         void OnTriggerEnter2D(Collider2D other)
@@ -86,7 +67,7 @@ namespace Tonhex
 
                 foreach (Vector2 availableDirection in node.availableDirections) {
                     Vector3 newPosition = transform.position + new Vector3(availableDirection.x, availableDirection.y);
-                    float distance = (ghost.target.position - newPosition).sqrMagnitude;
+                    float distance = (ghost.Target.position - newPosition).sqrMagnitude;
 
                     if (distance > maxDistance) {
                         direction = availableDirection;

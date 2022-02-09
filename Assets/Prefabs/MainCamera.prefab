@@ -294,3 +294,10 @@ MonoBehaviour:
   effectAudioSource: {fileID: 5298062829114097119}
   pitchLowRange: 0.95
   pitchHighRange: 1.05
+  palletEffectAudioClips:
+  - {fileID: 8300000, guid: a571637f1f06bc540b6af25f80da687a, type: 3}
+  - {fileID: 8300000, guid: dbcddabef9773804da2312b069fd3a6a, type: 3}
+  powerPalletEffectAudioClip: {fileID: 8300000, guid: e6195637a92701347a917288a1b86ac1, type: 3}
+  eatGhostEffectAudioClip: {fileID: 8300000, guid: 7f9883b220e8b60469778302cd2d5997, type: 3}
+  eatFruitEffectAudioClip: {fileID: 8300000, guid: efc63b27d4bbff14fbccd57cf1c95f94, type: 3}
+  playerDeathEffectAudioClip: {fileID: 8300000, guid: 2961eff49c3fe694290966488624d28b, type: 3}

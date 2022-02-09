@@ -5,8 +5,6 @@ namespace Tonhex
     public class Pellet : Item
     {
 
-        public LayerMask playerLayer;
-
         protected virtual void Eat()
         {
             GameManager.Instance.PelletEaten(this);
@@ -14,7 +12,7 @@ namespace Tonhex
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.layer == playerLayer.value) {
+            if (other.gameObject.layer == GameManager.Instance.playerLayer.value) {
                 Eat();
             }
         }

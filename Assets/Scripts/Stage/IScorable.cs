@@ -1,12 +1,12 @@
 namespace Tonhex
 {
 
-    public interface IScorable
+    interface IScorable
     {
 
-        public int scorePoints { get; set; }
+        int ScorePoints { get; set; }
 
-        public void Scored();
+        void Scored();
 
     }
 

@@ -4,7 +4,7 @@ namespace Tonhex
 {
 
     [RequireComponent(typeof(Enemy))]
-    public abstract class EnemyBehavior : MonoBehaviour
+    public abstract class EnemyBehaviour : MonoBehaviour
     {
 
         public Enemy enemy { get; private set; }

@@ -28,11 +28,24 @@ namespace Tonhex
         [Range(EFFECT_PITCH_DEFAULT, EFFECT_PITCH_MAX)]
         private float pitchHighRange = EFFECT_PITCH_DEFAULT_HIGH;
 
-        public AudioClip[] PalletEffectAudioClips { get; private set; }
-        public AudioClip PowerPalletEffectAudioClip { get; private set; }
-        public AudioClip EatGhostEffectAudioClip { get; private set; }
-        public AudioClip EatFruitEffectAudioClip { get; private set; }
-        public AudioClip PlayerDeathEffectAudioClip { get; private set; }
+        private AudioClip startLoolAudioClip;
+        public AudioClip StartLoolAudioClip => startLoolAudioClip;
+
+        [SerializeField]
+        private AudioClip[] palletEffectAudioClips;
+        public AudioClip[] PalletEffectAudioClips => palletEffectAudioClips;
+        [SerializeField]
+        private AudioClip powerPalletEffectAudioClip;
+        public AudioClip PowerPalletEffectAudioClip => powerPalletEffectAudioClip;
+        [SerializeField]
+        private AudioClip eatGhostEffectAudioClip;
+        public AudioClip EatGhostEffectAudioClip => eatGhostEffectAudioClip;
+        [SerializeField]
+        private AudioClip eatFruitEffectAudioClip;
+        public AudioClip EatFruitEffectAudioClip => eatFruitEffectAudioClip;
+        [SerializeField]
+        private AudioClip playerDeathEffectAudioClip;
+        public AudioClip PlayerDeathEffectAudioClip => playerDeathEffectAudioClip;
 
         private int currentAudioClipIndex = 0;
 
@@ -45,18 +58,26 @@ namespace Tonhex
             }
 
             DontDestroyOnLoad(gameObject);
+
+            Init();
+        }
+
+        public void Init()
+        {
+            currentAudioClipIndex = 0;
+
+            startLoolAudioClip = loopAudioSource.clip;
         }
 
         void Start()
         {
-            currentAudioClipIndex = 0;
-
             effectAudioSource.pitch = EFFECT_PITCH_DEFAULT;
+
+            PlayLoop(startLoolAudioClip);
         }
 
         public void PlayLoop(AudioClip audioClip)
         {
-            loopAudioSource.loop = true;
             loopAudioSource.clip = audioClip;
             loopAudioSource.Play();
         }
@@ -72,7 +93,7 @@ namespace Tonhex
             PlayLoop(audioClip);
         }
 
-        public void PlayEffect(AudioClip audioClip, float pitch = 1f)
+        public void PlayEffect(AudioClip audioClip, float pitch = EFFECT_PITCH_DEFAULT)
         {
             effectAudioSource.pitch = pitch;
             effectAudioSource.clip = audioClip;

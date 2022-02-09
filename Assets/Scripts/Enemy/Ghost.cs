@@ -6,17 +6,15 @@ namespace Tonhex
     public class Ghost : Enemy, IScorable
     {
 
-        public const string WHITE_ANIMATION = "White";
-        public const string BLUE_ANIMATION = "Blue";
+        public int ScorePoints { get; set; }
 
-        public GhostFrightened frightened { get; private set; }
-        // TODO: public GhostPrison prison { get; private set; }
-
-        public int scorePoints { get; set; }
+        public GhostFrightened Frightened { get; private set; }
+        public GhostPrison Prison { get; private set; }
 
         void Awake()
         {
-            Debug.Log("Ghost::Awake() - TODO");
+            Frightened = GetComponent<GhostFrightened>();
+            Prison = GetComponent<GhostPrison>();
         }
 
         void Start()
@@ -39,7 +37,7 @@ namespace Tonhex
         void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.layer == GameManager.Instance.playerLayer.value) {
-                if (frightened.enabled) {
+                if (Frightened.enabled) {
                     GameManager.Instance.GhostEaten(this);
                 } else {
                     GameManager.Instance.PacmanDeath();
@@ -49,8 +47,8 @@ namespace Tonhex
 
         public void Scored()
         {
-            // ghost.SetPosition(ghost.home.inside.position);
-            // ghost.home.Enable(duration);
+            SetPosition(Prison.inside.position);
+            Prison.Enable();
         }
 
     }
