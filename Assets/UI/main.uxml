@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="game-over" style="flex-grow: 1; align-items: center; justify-content: center;">
+        <ui:Label text="GAME OVER" display-tooltip-when-elided="true" name="game-over-label" style="-unity-font-definition: url(&apos;/Assets/Fonts/Retro Gaming SDF.asset&apos;); color: rgba(255, 0, 0, 255);" />
+    </ui:VisualElement>
+    <ui:VisualElement name="hud" style="flex-grow: 1; display: none;">
+        <ui:VisualElement name="life">
+            <ui:Label text="1UP" display-tooltip-when-elided="true" name="life-label" style="color: rgba(255, 255, 255, 255);" />
+            <ui:Label text="0" display-tooltip-when-elided="true" name="life-text" style="color: rgba(255, 255, 255, 255);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="score">
+            <ui:Label text="SCORE" display-tooltip-when-elided="true" name="score-label" style="color: rgba(255, 255, 255, 255);" />
+            <ui:Label text="0" display-tooltip-when-elided="true" name="score-text" style="color: rgba(255, 255, 255, 255);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
