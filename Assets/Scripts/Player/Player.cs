@@ -9,13 +9,6 @@ namespace Tonhex
 
         public Animator PlayerAnimator { get; protected set; }
 
-        protected override void Awake()
-        {
-            base.Awake();
-
-            PlayerAnimator = GetComponent<Animator>();
-        }
-
     }
 
 }

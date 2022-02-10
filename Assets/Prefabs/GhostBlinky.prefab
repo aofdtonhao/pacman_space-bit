@@ -7,6 +7,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 619912607914705936, guid: 1541224b4cc5bba49a563b3ab9e2ec3e, type: 3}
+      propertyPath: duration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217844159918193935, guid: 1541224b4cc5bba49a563b3ab9e2ec3e, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217844159918193935, guid: 1541224b4cc5bba49a563b3ab9e2ec3e, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217844159918193935, guid: 1541224b4cc5bba49a563b3ab9e2ec3e, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3928777644024345817, guid: 1541224b4cc5bba49a563b3ab9e2ec3e, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -17,7 +33,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4696320705465813626, guid: 1541224b4cc5bba49a563b3ab9e2ec3e, type: 3}
       propertyPath: m_Name
-      value: Blinky Ghost Variant
+      value: GhostBlinky
       objectReference: {fileID: 0}
     - target: {fileID: 4696320705465813627, guid: 1541224b4cc5bba49a563b3ab9e2ec3e, type: 3}
       propertyPath: m_RootOrder
@@ -66,6 +82,14 @@ PrefabInstance:
     - target: {fileID: 4696320705465813628, guid: 1541224b4cc5bba49a563b3ab9e2ec3e, type: 3}
       propertyPath: points
       value: 1600
+      objectReference: {fileID: 0}
+    - target: {fileID: 4696320705465813628, guid: 1541224b4cc5bba49a563b3ab9e2ec3e, type: 3}
+      propertyPath: scorePoints
+      value: 1600
+      objectReference: {fileID: 0}
+    - target: {fileID: 4696320705465813629, guid: 1541224b4cc5bba49a563b3ab9e2ec3e, type: 3}
+      propertyPath: initialDirection.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1541224b4cc5bba49a563b3ab9e2ec3e, type: 3}

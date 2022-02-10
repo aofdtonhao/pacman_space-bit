@@ -16,15 +16,15 @@ namespace Tonhex
 
         public Vector2 initialDirection;
 
-        public new Rigidbody2D rigidbody { get; private set; }
+        public Rigidbody2D chupeta;
 
-        public Vector2 direction { get; private set; }
+        public Vector2 direction { get; /*private*/ set; }
         public Vector2 nextDirection { get; private set; }
         public Vector3 startingPosition { get; private set; }
 
         void Awake()
         {
-            rigidbody = GetComponent<Rigidbody2D>();
+            chupeta = GetComponent<Rigidbody2D>();
             startingPosition = transform.position;
         }
 
@@ -35,43 +35,60 @@ namespace Tonhex
 
         void FixedUpdate()
         {
-            Vector2 position = rigidbody.position;
+            Vector2 position = chupeta.position;
             Vector2 translation = direction * speed * speedMultiplier * Time.fixedDeltaTime;
 
-            rigidbody.MovePosition(position + translation);
+            Debug.Log("speed * speedMultiplier: " + speed * speedMultiplier);
+            Debug.Log("position: " + position);
+            Debug.Log("translation: " + translation);
+            Debug.Log("direction: " + direction);
+            Debug.Log("rigidbody: " + chupeta.name);
+
+            chupeta.MovePosition(position + translation);
         }
 
         void Update()
         {
-            if (nextDirection != Vector2.zero) {
+            if (nextDirection != Vector2.zero)
+            {
                 SetDirection(nextDirection);
             }
         }
 
         public void ResetState()
         {
+            Debug.Log("SPECIAL PLACE: " + initialDirection);
+
             speedMultiplier = 1f;
             direction = initialDirection;
             nextDirection = Vector2.zero;
             transform.position = startingPosition;
-            rigidbody.isKinematic = false;
+            chupeta.isKinematic = false;
             enabled = true;
         }
 
         public void SetDirection(Vector2 direction, bool forced = false)
         {
-            if (forced || !Occupied(direction)) {
+            if (forced || !Occupied(direction))
+            {
                 this.direction = direction;
                 nextDirection = Vector2.zero;
-            } else {
+
+                Debug.Log("SetDirection:: forced || !Occupied(direction)");
+            }
+            else
+            {
+                Debug.Log("SetDirection:: else");
+
                 nextDirection = direction;
             }
         }
 
         public bool Occupied(Vector2 direction)
         {
-            RaycastHit2D hit = Physics2D.BoxCast(transform.position, Vector2.one * 0.75f, 0f, direction, 1.5f, GameManager.Instance.mazeLayer);
-            return (hit.collider != null);
+            // If no collider is hit then there is no obstacle in that direction
+            RaycastHit2D hit = Physics2D.BoxCast(transform.position, Vector2.one * 0.75f, 0f, direction, 1.5f, GameManager.Instance.MazeLayer);
+            return hit.collider != null;
         }
 
     }

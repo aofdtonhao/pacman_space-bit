@@ -12,7 +12,8 @@ namespace Tonhex
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.layer == GameManager.Instance.PlayerLayer.value) {
+            if (other.gameObject.layer == GameManager.Instance.PlayerLayer.value)
+            {
                 Scored();
             }
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Tonhex
 {
 
-    public abstract class Enemy : Character, IScorable
+    public class Enemy : Character
     {
 
         [SerializeField]
@@ -13,8 +13,6 @@ namespace Tonhex
         [SerializeField]
         private int scorePoints;
         public int ScorePoints => scorePoints;
-
-        public abstract void Scored();
 
     }
 

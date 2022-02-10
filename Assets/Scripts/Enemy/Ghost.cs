@@ -5,10 +5,12 @@ using UnityEngine;
 namespace Tonhex
 {
 
-    public class Ghost : Enemy
+    public class Ghost : Enemy, IScorable
     {
 
         public Animator GhostAnimator { get; protected set; }
+
+        public GhostEyes Eyes { get; private set; }
 
         public GhostFrightened Frightened { get; private set; }
         public GhostPrison Prison { get; private set; }
@@ -16,9 +18,9 @@ namespace Tonhex
         [SerializeField]
         private GhostBehaviour defaultBehaviour = null;
 
-        protected override void Awake()
+        void Awake()
         {
-            base.Awake();
+            CharacterMovement = GetComponent<Movement>();
 
             GhostAnimator = GetComponent<Animator>();
 
@@ -28,7 +30,14 @@ namespace Tonhex
 
         void Start()
         {
+            Eyes = GetComponentInChildren<GhostEyes>();
+
             ResetState();
+        }
+
+        void Update()
+        {
+            Eyes.enabled = Frightened.isActiveAndEnabled || Prison.isActiveAndEnabled;
         }
 
         public void ResetState()
@@ -36,22 +45,28 @@ namespace Tonhex
             gameObject.SetActive(true);
             CharacterMovement.ResetState();
 
-            foreach (AnimatorControllerParameter parameter in GhostAnimator.parameters) {
-                if (parameter.type == AnimatorControllerParameterType.Bool) {
-                    GhostAnimator.SetBool(parameter.name, false);
-                }
-            }
-            // TODO: GhostAnimator.SetBool(ANIMATION_BOOL_DEATH, false);
-            // TODO: GhostAnimator.SetBool(GhostBehaviour.ANIMATION_BOOL_FLASH, false);
-
-            foreach (GhostBehaviour ghostBehaviour in GetComponents<GhostBehaviour>()) {
-                if (ghostBehaviour != defaultBehaviour) {
-                    defaultBehaviour.Disable();
+            foreach (AnimatorControllerParameter parameter in GhostAnimator.parameters)
+            {
+                if (parameter.type == AnimatorControllerParameterType.Bool)
+                {
+                    // GhostAnimator.SetBool(parameter.name, false);
                 }
             }
 
-            if (defaultBehaviour != null) {
-                defaultBehaviour.Enable();
+            Frightened.Disable();
+            // Prison.Disable();
+
+            if (Prison != defaultBehaviour)
+            {
+                Debug.Log("Prison == defaultBehaviour");
+                // Prison.Disable();
+            }
+
+            if (defaultBehaviour != null)
+            {
+                Debug.Log("defaultBehaviour != null");
+
+                // defaultBehaviour.Enable();
             }
         }
 
@@ -63,16 +78,20 @@ namespace Tonhex
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.layer == GameManager.Instance.PlayerLayer.value) {
-                if (Frightened.enabled) {
+            if (collision.gameObject.layer == GameManager.Instance.PlayerLayer.value)
+            {
+                if (Frightened.enabled)
+                {
                     GameManager.Instance.GhostEaten(this);
-                } else {
+                }
+                else
+                {
                     GameManager.Instance.PacmanDeath();
                 }
             }
         }
 
-        public override void Scored()
+        public void Scored()
         {
             SetPosition(Prison.inside.position);
             Prison.Enable(Prison.Duration);

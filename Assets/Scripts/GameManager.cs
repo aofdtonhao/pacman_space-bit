@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     private MainUIController mainUIController;
 
     [SerializeField]
-    public LayerMask mazeLayer;
+    private LayerMask mazeLayer;
     public LayerMask MazeLayer => mazeLayer;
 
     [SerializeField]
@@ -27,13 +27,16 @@ public class GameManager : MonoBehaviour
     public int ghostMultiplier { get; private set; } = GHOST_MULTIPLIER_DEFAULT;
     public int score { get; private set; }
     public int lives { get; private set; }
-    
+
 
     void Awake()
     {
-        if (Instance == null) {
+        if (Instance == null)
+        {
             Instance = this;
-        } else if (Instance != this) {
+        }
+        else if (Instance != this)
+        {
             Destroy(gameObject);
         }
 
@@ -47,7 +50,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (lives <= 0 && Input.anyKey) {
+        if (lives <= 0 && Input.anyKey)
+        {
             NewGame();
         }
     }
@@ -64,7 +68,8 @@ public class GameManager : MonoBehaviour
         // TODO: mainUIController.gameOverText.enabled = false;
         Debug.Log("GameManager::NewRound()");
 
-        foreach (Transform pellet in pellets) {
+        foreach (Transform pellet in pellets)
+        {
             pellet.gameObject.SetActive(true);
         }
 
@@ -73,7 +78,8 @@ public class GameManager : MonoBehaviour
 
     private void ResetState()
     {
-        for (int i = 0; i < ghosts.Length; i++) {
+        for (int i = 0; i < ghosts.Length; i++)
+        {
             ghosts[i].ResetState();
         }
 
@@ -85,7 +91,8 @@ public class GameManager : MonoBehaviour
         // TODO: mainUIController.gameOverText.enabled = true;
         Debug.Log("GAME OVER");
 
-        for (int i = 0; i < ghosts.Length; i++) {
+        for (int i = 0; i < ghosts.Length; i++)
+        {
             ghosts[i].gameObject.SetActive(false);
         }
 
@@ -114,9 +121,12 @@ public class GameManager : MonoBehaviour
 
         SetLives(lives - 1);
 
-        if (lives > 0) {
+        if (lives > 0)
+        {
             Invoke(nameof(ResetState), 3f);
-        } else {
+        }
+        else
+        {
             GameOver();
         }
     }
@@ -133,7 +143,8 @@ public class GameManager : MonoBehaviour
 
     public void PelletEaten(Pellet pellet, bool playAudio = true)
     {
-        if (playAudio) {
+        if (playAudio)
+        {
             AudioManager.Instance.PlayEffectSequence(AudioManager.Instance.PalletEffectAudioSequence);
         }
 
@@ -141,7 +152,8 @@ public class GameManager : MonoBehaviour
 
         SetScore(score + pellet.ScorePoints);
 
-        if (!HasRemainingPellets()) {
+        if (!HasRemainingPellets())
+        {
             pacman.gameObject.SetActive(false);
             Invoke(nameof(NewRound), 3f);
         }
@@ -149,7 +161,8 @@ public class GameManager : MonoBehaviour
 
     public void PowerPelletEaten(PowerPellet pellet)
     {
-        for (int i = 0; i < ghosts.Length; i++) {
+        for (int i = 0; i < ghosts.Length; i++)
+        {
             ghosts[i].Frightened.Enable(pellet.Duration);
         }
 
@@ -163,8 +176,10 @@ public class GameManager : MonoBehaviour
 
     private bool HasRemainingPellets()
     {
-        foreach (Transform pellet in pellets) {
-            if (pellet.gameObject.activeSelf) {
+        foreach (Transform pellet in pellets)
+        {
+            if (pellet.gameObject.activeSelf)
+            {
                 return true;
             }
         }

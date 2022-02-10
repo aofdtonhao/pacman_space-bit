@@ -55,15 +55,18 @@ namespace Tonhex
         {
             Node node = other.GetComponent<Node>();
 
-            if (node != null && enabled) {
+            if (node != null && enabled)
+            {
                 Vector2 direction = Vector2.zero;
                 float maxDistance = float.MinValue;
 
-                foreach (Vector2 availableDirection in node.availableDirections) {
+                foreach (Vector2 availableDirection in node.availableDirections)
+                {
                     Vector3 newPosition = transform.position + new Vector3(availableDirection.x, availableDirection.y);
                     float distance = (GhostEnemy.Target.position - newPosition).sqrMagnitude;
 
-                    if (distance > maxDistance) {
+                    if (distance > maxDistance)
+                    {
                         direction = availableDirection;
                         maxDistance = distance;
                     }
@@ -75,7 +78,8 @@ namespace Tonhex
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.layer == GameManager.Instance.PlayerLayer.value && enabled) {
+            if (collision.gameObject.layer == GameManager.Instance.PlayerLayer.value && enabled)
+            {
                 Eaten();
             }
         }

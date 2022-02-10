@@ -290,14 +290,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a48b74cb0ca0b0c4fbf0d83bf7737601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopAudioSource: {fileID: 5298062829114096928}
+  musicAudioSource: {fileID: 5298062829114096928}
   effectAudioSource: {fileID: 5298062829114097119}
   pitchLowRange: 0.95
   pitchHighRange: 1.05
-  palletEffectAudioClips:
-  - {fileID: 8300000, guid: a571637f1f06bc540b6af25f80da687a, type: 3}
-  - {fileID: 8300000, guid: dbcddabef9773804da2312b069fd3a6a, type: 3}
+  startEffectAudioClip: {fileID: 8300000, guid: 9f9a7520e54b4e843bca31cc678cad6e, type: 3}
+  inGameMusicAudioClip: {fileID: 8300000, guid: f1a7d011b9fe6374db19d18f4a93b0c8, type: 3}
   powerPalletEffectAudioClip: {fileID: 8300000, guid: e6195637a92701347a917288a1b86ac1, type: 3}
   eatGhostEffectAudioClip: {fileID: 8300000, guid: 7f9883b220e8b60469778302cd2d5997, type: 3}
   eatFruitEffectAudioClip: {fileID: 8300000, guid: efc63b27d4bbff14fbccd57cf1c95f94, type: 3}
   playerDeathEffectAudioClip: {fileID: 8300000, guid: 2961eff49c3fe694290966488624d28b, type: 3}
+  palletEffectAudioAudioClips:
+  - {fileID: 8300000, guid: a571637f1f06bc540b6af25f80da687a, type: 3}
+  - {fileID: 8300000, guid: dbcddabef9773804da2312b069fd3a6a, type: 3}

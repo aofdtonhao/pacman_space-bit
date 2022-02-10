@@ -17,14 +17,16 @@ namespace Tonhex
 
         void OnDisable()
         {
-            if (gameObject.activeSelf) {
+            if (gameObject.activeSelf)
+            {
                 StartCoroutine(ExitTransition());
             }
         }
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            if (enabled && (collision.gameObject.layer == GameManager.Instance.mazeLayer.value)) {
+            if (collision.gameObject.layer == GameManager.Instance.MazeLayer.value)
+            {
                 GhostEnemy.CharacterMovement.SetDirection(-GhostEnemy.CharacterMovement.direction);
             }
         }
@@ -32,7 +34,7 @@ namespace Tonhex
         private IEnumerator ExitTransition()
         {
             GhostEnemy.CharacterMovement.SetDirection(Vector2.up, true);
-            GhostEnemy.CharacterMovement.rigidbody.isKinematic = true;
+            GhostEnemy.CharacterMovement.chupeta.isKinematic = true;
             GhostEnemy.CharacterMovement.enabled = false;
 
             Vector3 position = transform.position;
@@ -40,7 +42,8 @@ namespace Tonhex
             float duration = 0.5f;
             float elapsed = 0f;
 
-            while (elapsed < duration) {
+            while (elapsed < duration)
+            {
                 GhostEnemy.SetPosition(Vector3.Lerp(position, inside.position, elapsed / duration));
                 elapsed += Time.deltaTime;
                 yield return null;
@@ -48,14 +51,15 @@ namespace Tonhex
 
             elapsed = 0f;
 
-            while (elapsed < duration) {
+            while (elapsed < duration)
+            {
                 GhostEnemy.SetPosition(Vector3.Lerp(inside.position, outside.position, elapsed / duration));
                 elapsed += Time.deltaTime;
                 yield return null;
             }
 
             GhostEnemy.CharacterMovement.SetDirection(new Vector2(Random.value < 0.5f ? -1f : 1f, 0f), true);
-            GhostEnemy.CharacterMovement.rigidbody.isKinematic = false;
+            GhostEnemy.CharacterMovement.chupeta.isKinematic = false;
             GhostEnemy.CharacterMovement.enabled = true;
 
             GhostAnimator.SetBool(Character.ANIMATION_BOOL_DEATH, false);

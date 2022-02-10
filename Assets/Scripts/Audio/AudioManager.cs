@@ -57,10 +57,13 @@ namespace Tonhex
 
         void Awake()
         {
-            if (Instance == null) {
+            if (Instance == null)
+            {
                 Instance = this;
-            } else if (Instance != this) {
-                Destroy(gameObject);
+            }
+            else if (Instance != this)
+            {
+                 Destroy(gameObject);
             }
 
             DontDestroyOnLoad(gameObject);
@@ -81,9 +84,12 @@ namespace Tonhex
             musicAudioSource.loop = true;
             musicAudioSource.clip = audioClip;
 
-            if (delay > 0f) {
+            if (delay > 0f)
+            {
                 musicAudioSource.PlayDelayed(delay);
-            } else {
+            }
+            else
+            {
                 musicAudioSource.Play();
             }
         }
