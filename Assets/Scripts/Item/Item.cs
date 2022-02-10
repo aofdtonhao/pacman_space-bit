@@ -7,7 +7,9 @@ namespace Tonhex
     public abstract class Item : MonoBehaviour, IScorable
     {
 
-        public int ScorePoints { get; set; }
+        [SerializeField]
+        private int scorePoints;
+        public int ScorePoints => scorePoints;
 
         public abstract void Scored();
 

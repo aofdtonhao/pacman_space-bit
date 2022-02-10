@@ -8,7 +8,11 @@ namespace Tonhex
     public abstract class GhostBehaviour : MonoBehaviour
     {
 
-        public virtual float Duration { get; protected set; }
+        public const string ANIMATION_BOOL_FLASH = "Flash";
+
+        [SerializeField]
+        private float duration = 0f;
+        public float Duration => duration;
 
         public Ghost GhostEnemy { get; protected set; }
 
@@ -23,7 +27,7 @@ namespace Tonhex
 
         public void Enable()
         {
-            Enable(Duration);
+            Enable(duration);
         }
 
         public virtual void Enable(float duration)
@@ -31,7 +35,7 @@ namespace Tonhex
             enabled = true;
 
             StopAllCoroutines();
-            WaitAndDisable(duration);
+            StartCoroutine(WaitAndDisable(duration));
         }
 
         public virtual void Disable()

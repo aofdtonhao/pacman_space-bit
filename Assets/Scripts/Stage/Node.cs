@@ -35,7 +35,8 @@ namespace Tonhex
 
         private void CheckAvailableDirection(Vector2 direction)
         {
-            RaycastHit2D hit = Physics2D.BoxCast(transform.position, Vector2.one * collider.bounds.extents, 0f, direction, 1f, GameManager.Instance.mazeLayer);
+            RaycastHit2D hit = Physics2D.BoxCast(transform.position,
+                Vector2.one * collider.bounds.extents, 0f, direction, 1f, GameManager.Instance.mazeLayer);
 
             if (hit.collider == null) {
                 availableDirections.Add(direction);

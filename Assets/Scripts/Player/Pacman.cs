@@ -37,11 +37,16 @@ namespace Tonhex
             enabled = true;
             spriteRenderer.enabled = true;
             collider.enabled = true;
-            PlayerAnimator.SetBool(ANIMATION_BOOL_DEATH, false);
             CharacterMovement.ResetState();
             gameObject.SetActive(true);
-        }
 
+            foreach (AnimatorControllerParameter parameter in PlayerAnimator.parameters) {
+                if (parameter.type == AnimatorControllerParameterType.Bool) {
+                    PlayerAnimator.SetBool(parameter.name, false);
+                }
+            }
+            // TODO: PlayerAnimator.SetBool(ANIMATION_BOOL_DEATH, false);
+        }
         public void DeathSequence()
         {
             enabled = false;

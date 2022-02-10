@@ -34,7 +34,7 @@ namespace Tonhex
         [SerializeField]
         private AudioClip inGameMusicAudioClip;
         public AudioClip InGameMusicAudioClip => inGameMusicAudioClip;
-        
+
         [SerializeField]
         private AudioClip powerPalletEffectAudioClip;
         public AudioClip PowerPalletEffectAudioClip => powerPalletEffectAudioClip;

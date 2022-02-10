@@ -3,11 +3,19 @@ using UnityEngine;
 namespace Tonhex
 {
 
-    public abstract class Enemy : Character
+    public abstract class Enemy : Character, IScorable
     {
 
-        public Transform target;
-        
+        [SerializeField]
+        private Transform target;
+        public Transform Target => target;
+
+        [SerializeField]
+        private int scorePoints;
+        public int ScorePoints => scorePoints;
+
+        public abstract void Scored();
+
     }
 
 }

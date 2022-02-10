@@ -7,11 +7,17 @@ namespace Tonhex
     public class Movement : MonoBehaviour
     {
 
+        public const float SPEED_MULTIPLIER_DEFAULT = 1f;
+
         public float speed = 8f;
-        public float speedMultiplier = 1f;
+
+        [HideInInspector]
+        public float speedMultiplier;
+
         public Vector2 initialDirection;
 
         public new Rigidbody2D rigidbody { get; private set; }
+
         public Vector2 direction { get; private set; }
         public Vector2 nextDirection { get; private set; }
         public Vector3 startingPosition { get; private set; }

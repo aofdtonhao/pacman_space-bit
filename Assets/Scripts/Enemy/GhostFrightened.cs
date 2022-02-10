@@ -7,10 +7,7 @@ namespace Tonhex
     public class GhostFrightened : GhostBehaviour
     {
 
-        public const string ANIMATION_BOOL_FLASH = "Flash";
-
-        public const float SPEED_MULTIPLIER_DEFAULT = 1f;
-        public const float SPEED_MULTIPLIER_FLASH = SPEED_MULTIPLIER_DEFAULT / 2f;
+        public const float SPEED_MULTIPLIER_FLASH = Movement.SPEED_MULTIPLIER_DEFAULT / 2f;
 
         public bool IsEaten { get; private set; }
 
@@ -18,6 +15,7 @@ namespace Tonhex
         {
             base.Enable(duration);
 
+            GhostAnimator.SetBool(Character.ANIMATION_BOOL_DEATH, false);
             GhostAnimator.SetBool(ANIMATION_BOOL_FLASH, true);
         }
 
@@ -26,6 +24,7 @@ namespace Tonhex
             base.Disable();
 
             GhostAnimator.SetBool(ANIMATION_BOOL_FLASH, false);
+            GhostAnimator.SetBool(Character.ANIMATION_BOOL_DEATH, false);
         }
 
         private void Eaten()
@@ -34,6 +33,7 @@ namespace Tonhex
 
             GhostEnemy.Scored();
 
+            GhostAnimator.SetBool(ANIMATION_BOOL_FLASH, false);
             GhostAnimator.SetBool(Character.ANIMATION_BOOL_DEATH, true);
         }
 
@@ -46,7 +46,7 @@ namespace Tonhex
 
         void OnDisable()
         {
-            GhostEnemy.CharacterMovement.speedMultiplier = SPEED_MULTIPLIER_DEFAULT;
+            GhostEnemy.CharacterMovement.speedMultiplier = Movement.SPEED_MULTIPLIER_DEFAULT;
 
             IsEaten = false;
         }
@@ -61,7 +61,7 @@ namespace Tonhex
 
                 foreach (Vector2 availableDirection in node.availableDirections) {
                     Vector3 newPosition = transform.position + new Vector3(availableDirection.x, availableDirection.y);
-                    float distance = (GhostEnemy.target.position - newPosition).sqrMagnitude;
+                    float distance = (GhostEnemy.Target.position - newPosition).sqrMagnitude;
 
                     if (distance > maxDistance) {
                         direction = availableDirection;
@@ -75,7 +75,7 @@ namespace Tonhex
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.layer == GameManager.Instance.playerLayer.value && enabled) {
+            if (collision.gameObject.layer == GameManager.Instance.PlayerLayer.value && enabled) {
                 Eaten();
             }
         }

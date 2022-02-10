@@ -5,6 +5,8 @@ using Tonhex;
 public class GameManager : MonoBehaviour
 {
 
+    public const int GHOST_MULTIPLIER_DEFAULT = 1;
+
     public static GameManager Instance { get; private set; } = null;
 
     public Ghost[] ghosts;
@@ -14,12 +16,18 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private MainUIController mainUIController;
 
+    [SerializeField]
     public LayerMask mazeLayer;
-    public LayerMask playerLayer;
+    public LayerMask MazeLayer => mazeLayer;
 
-    public int ghostMultiplier { get; private set; } = 1;
+    [SerializeField]
+    private LayerMask playerLayer;
+    public LayerMask PlayerLayer => playerLayer;
+
+    public int ghostMultiplier { get; private set; } = GHOST_MULTIPLIER_DEFAULT;
     public int score { get; private set; }
     public int lives { get; private set; }
+    
 
     void Awake()
     {
@@ -142,7 +150,7 @@ public class GameManager : MonoBehaviour
     public void PowerPelletEaten(PowerPellet pellet)
     {
         for (int i = 0; i < ghosts.Length; i++) {
-            ghosts[i].Frightened.Enable(pellet.duration);
+            ghosts[i].Frightened.Enable(pellet.Duration);
         }
 
         AudioManager.Instance.PlayEffect(AudioManager.Instance.PowerPalletEffectAudioClip);
@@ -150,7 +158,7 @@ public class GameManager : MonoBehaviour
         PelletEaten(pellet, false);
 
         CancelInvoke(nameof(ResetGhostMultiplier));
-        Invoke(nameof(ResetGhostMultiplier), pellet.duration);
+        Invoke(nameof(ResetGhostMultiplier), pellet.Duration);
     }
 
     private bool HasRemainingPellets()
@@ -166,7 +174,7 @@ public class GameManager : MonoBehaviour
 
     private void ResetGhostMultiplier()
     {
-        ghostMultiplier = 1;
+        ghostMultiplier = GHOST_MULTIPLIER_DEFAULT;
     }
 
 }
