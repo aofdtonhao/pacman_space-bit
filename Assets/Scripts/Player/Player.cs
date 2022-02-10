@@ -3,17 +3,17 @@ using UnityEngine;
 namespace Tonhex
 {
 
-    public class Player : Character
+    [RequireComponent(typeof(Animator))]
+    public abstract class Player : Character
     {
 
-        void Awake()
-        {
-            Debug.Log("Player::Awake() - TODO");
-        }
+        public Animator PlayerAnimator { get; protected set; }
 
-        void Start()
+        protected override void Awake()
         {
-            Debug.Log("Player::Start() - TODO");
+            base.Awake();
+
+            PlayerAnimator = GetComponent<Animator>();
         }
 
     }

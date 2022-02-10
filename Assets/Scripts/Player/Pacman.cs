@@ -9,13 +9,12 @@ namespace Tonhex
         public SpriteRenderer spriteRenderer { get; private set; }
         public new Collider2D collider { get; private set; }
 
-        private Animator animator;
-
-        void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             spriteRenderer = GetComponent<SpriteRenderer>();
             collider = GetComponent<Collider2D>();
-            animator = GetComponent<Animator>();
         }
 
         void Update()
@@ -28,8 +27,8 @@ namespace Tonhex
             }
 
             if (inputX != 0 || inputY != 0) {
-                movement.SetDirection(new Vector3(inputX, inputY));
-                transform.rotation = Quaternion.FromToRotation(movement.direction, transform.forward);
+                CharacterMovement.SetDirection(new Vector3(inputX, inputY));
+                transform.rotation = Quaternion.FromToRotation(CharacterMovement.direction, transform.forward);
             }
         }
 
@@ -38,8 +37,8 @@ namespace Tonhex
             enabled = true;
             spriteRenderer.enabled = true;
             collider.enabled = true;
-            animator.SetBool(ANIMATION_BOOL_DEATH, false);
-            movement.ResetState();
+            PlayerAnimator.SetBool(ANIMATION_BOOL_DEATH, false);
+            CharacterMovement.ResetState();
             gameObject.SetActive(true);
         }
 
@@ -48,8 +47,8 @@ namespace Tonhex
             enabled = false;
             spriteRenderer.enabled = false;
             collider.enabled = false;
-            movement.enabled = false;
-            animator.SetBool(ANIMATION_BOOL_DEATH, true);
+            CharacterMovement.enabled = false;
+            PlayerAnimator.SetBool(ANIMATION_BOOL_DEATH, true);
         }
 
     }

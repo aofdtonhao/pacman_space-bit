@@ -11,8 +11,10 @@ namespace Tonhex
         public GhostFrightened Frightened { get; private set; }
         public GhostPrison Prison { get; private set; }
 
-        void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             Frightened = GetComponent<GhostFrightened>();
             Prison = GetComponent<GhostPrison>();
         }
@@ -25,7 +27,7 @@ namespace Tonhex
         public void ResetState()
         {
             gameObject.SetActive(true);
-            movement.ResetState();
+            CharacterMovement.ResetState();
         }
 
         public void SetPosition(Vector3 position)

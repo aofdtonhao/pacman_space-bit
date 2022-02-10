@@ -14,46 +14,40 @@ namespace Tonhex
 
         public bool IsEaten { get; private set; }
 
-        private Animator animator;
-
-        void Awake()
-        {
-            animator = GetComponent<Animator>();
-        }
-
         public override void Enable(float duration)
         {
             base.Enable(duration);
 
-            // TODO: animator.SetBool(ANIMATION_BOOL_FLASH, true);
+            GhostAnimator.SetBool(ANIMATION_BOOL_FLASH, true);
         }
 
         public override void Disable()
         {
             base.Disable();
 
-            // TODO: animator.SetBool(ANIMATION_BOOL_FLASH, false);
+            GhostAnimator.SetBool(ANIMATION_BOOL_FLASH, false);
         }
 
         private void Eaten()
         {
             IsEaten = true;
 
-            ghost.Scored();
+            GhostEnemy.Scored();
 
-            // TODO: animator.SetBool(Character.ANIMATION_BOOL_DEATH, true);
+            GhostAnimator.SetBool(Character.ANIMATION_BOOL_DEATH, true);
         }
 
         void OnEnable()
         {
-            enemy.movement.speedMultiplier = SPEED_MULTIPLIER_FLASH;
+            GhostEnemy.CharacterMovement.speedMultiplier = SPEED_MULTIPLIER_FLASH;
 
             IsEaten = false;
         }
 
         void OnDisable()
         {
-            enemy.movement.speedMultiplier = SPEED_MULTIPLIER_DEFAULT;
+            GhostEnemy.CharacterMovement.speedMultiplier = SPEED_MULTIPLIER_DEFAULT;
+
             IsEaten = false;
         }
 
@@ -67,7 +61,7 @@ namespace Tonhex
 
                 foreach (Vector2 availableDirection in node.availableDirections) {
                     Vector3 newPosition = transform.position + new Vector3(availableDirection.x, availableDirection.y);
-                    float distance = (ghost.Target.position - newPosition).sqrMagnitude;
+                    float distance = (GhostEnemy.target.position - newPosition).sqrMagnitude;
 
                     if (distance > maxDistance) {
                         direction = availableDirection;
@@ -75,7 +69,7 @@ namespace Tonhex
                     }
                 }
 
-                enemy.movement.SetDirection(direction);
+                GhostEnemy.CharacterMovement.SetDirection(direction);
             }
         }
 

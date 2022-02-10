@@ -4,16 +4,16 @@ namespace Tonhex
 {
 
     [RequireComponent(typeof(Movement))]
-    public class Character : MonoBehaviour
+    public abstract class Character : MonoBehaviour
     {
 
         public const string ANIMATION_BOOL_DEATH = "Death";
 
-        public Movement movement { get; private set; }
+        public Movement CharacterMovement { get; protected set; }
 
-        void Awake()
+        protected virtual void Awake()
         {
-            movement = GetComponent<Movement>();
+            CharacterMovement = GetComponent<Movement>();
         }
 
     }

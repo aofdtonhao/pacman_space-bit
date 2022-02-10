@@ -117,8 +117,8 @@ public class GameManager : MonoBehaviour
     {
         AudioManager.Instance.PlayEffect(AudioManager.Instance.EatGhostEffectAudioClip);
 
-        int points = ghost.ScorePoints * ghostMultiplier;
-        SetScore(score + points);
+        int ghostScorePoints = ghost.ScorePoints * ghostMultiplier;
+        SetScore(score + ghostScorePoints);
 
         ghostMultiplier++;
     }
@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
     public void PelletEaten(Pellet pellet, bool playAudio = true)
     {
         if (playAudio) {
-            AudioManager.Instance.PlayEffectSequence(AudioManager.Instance.PalletEffectAudioClips);
+            AudioManager.Instance.PlayEffectSequence(AudioManager.Instance.PalletEffectAudioSequence);
         }
 
         pellet.gameObject.SetActive(false);

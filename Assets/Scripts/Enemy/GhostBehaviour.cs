@@ -1,17 +1,51 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Tonhex
 {
 
     [RequireComponent(typeof(Ghost))]
-    public class GhostBehaviour : EnemyBehaviour
+    public abstract class GhostBehaviour : MonoBehaviour
     {
 
-        public Ghost ghost { get; private set; }
+        public virtual float Duration { get; protected set; }
 
-        void Start()
+        public Ghost GhostEnemy { get; protected set; }
+
+        public Animator GhostAnimator { get; protected set; }
+
+
+        protected virtual void Awake()
         {
-            ghost = (Ghost)enemy;
+            GhostEnemy = GetComponent<Ghost>();
+            GhostAnimator = GetComponent<Animator>();
+        }
+
+        public void Enable()
+        {
+            Enable(Duration);
+        }
+
+        public virtual void Enable(float duration)
+        {
+            enabled = true;
+
+            StopAllCoroutines();
+            WaitAndDisable(duration);
+        }
+
+        public virtual void Disable()
+        {
+            enabled = false;
+
+            StopAllCoroutines();
+        }
+
+        IEnumerator WaitAndDisable(float duration)
+        {
+            yield return new WaitForSeconds(duration);
+
+            Disable();
         }
 
     }

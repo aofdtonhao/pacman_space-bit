@@ -6,7 +6,7 @@ namespace Tonhex
 
         public float duration = 8f;
 
-        protected override void Eat()
+        public override void Scored()
         {
             GameManager.Instance.PowerPelletEaten(this);
         }

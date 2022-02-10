@@ -6,14 +6,9 @@ namespace Tonhex
     public class Fruit : Item
     {
 
-        void Awake()
+        public override void Scored()
         {
-            Debug.Log("Fruit::Awake() - TODO");
-        }
-
-        void Start()
-        {
-            Debug.Log("Fruit::Start() - TODO");
+            Debug.Log("Fruit::Scored() - TODO");
         }
 
     }

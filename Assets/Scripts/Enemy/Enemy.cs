@@ -3,10 +3,10 @@ using UnityEngine;
 namespace Tonhex
 {
 
-    public class Enemy : Character
+    public abstract class Enemy : Character
     {
 
-        public Transform Target { get; set; }
+        public Transform target;
         
     }
 

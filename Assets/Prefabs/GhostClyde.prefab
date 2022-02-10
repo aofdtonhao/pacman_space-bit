@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4696320705465813626, guid: 1541224b4cc5bba49a563b3ab9e2ec3e, type: 3}
       propertyPath: m_Name
-      value: Clyde Ghost Variant
+      value: GhostClyde
       objectReference: {fileID: 0}
     - target: {fileID: 4696320705465813627, guid: 1541224b4cc5bba49a563b3ab9e2ec3e, type: 3}
       propertyPath: m_RootOrder

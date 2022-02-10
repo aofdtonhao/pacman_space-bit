@@ -17,7 +17,7 @@ namespace Tonhex
         public static AudioManager Instance { get; private set; } = null;
 
         [SerializeField]
-        private AudioSource loopAudioSource;
+        private AudioSource musicAudioSource;
         [SerializeField]
         private AudioSource effectAudioSource;
 
@@ -28,12 +28,13 @@ namespace Tonhex
         [Range(EFFECT_PITCH_DEFAULT, EFFECT_PITCH_MAX)]
         private float pitchHighRange = EFFECT_PITCH_DEFAULT_HIGH;
 
-        private AudioClip startLoolAudioClip;
-        public AudioClip StartLoolAudioClip => startLoolAudioClip;
-
         [SerializeField]
-        private AudioClip[] palletEffectAudioClips;
-        public AudioClip[] PalletEffectAudioClips => palletEffectAudioClips;
+        private AudioClip startEffectAudioClip;
+        public AudioClip StartEffectAudioClip => StartEffectAudioClip;
+        [SerializeField]
+        private AudioClip inGameMusicAudioClip;
+        public AudioClip InGameMusicAudioClip => inGameMusicAudioClip;
+        
         [SerializeField]
         private AudioClip powerPalletEffectAudioClip;
         public AudioClip PowerPalletEffectAudioClip => powerPalletEffectAudioClip;
@@ -47,7 +48,12 @@ namespace Tonhex
         private AudioClip playerDeathEffectAudioClip;
         public AudioClip PlayerDeathEffectAudioClip => playerDeathEffectAudioClip;
 
-        private int currentAudioClipIndex = 0;
+
+        [SerializeField]
+        private AudioClip[] palletEffectAudioAudioClips;
+
+        private AudioSequence palletEffectAudioAudioSequence;
+        public AudioSequence PalletEffectAudioSequence => palletEffectAudioAudioSequence;
 
         void Awake()
         {
@@ -58,39 +64,39 @@ namespace Tonhex
             }
 
             DontDestroyOnLoad(gameObject);
-
-            Init();
-        }
-
-        public void Init()
-        {
-            currentAudioClipIndex = 0;
-
-            startLoolAudioClip = loopAudioSource.clip;
         }
 
         void Start()
         {
             effectAudioSource.pitch = EFFECT_PITCH_DEFAULT;
 
-            PlayLoop(startLoolAudioClip);
+            palletEffectAudioAudioSequence = new AudioSequence(palletEffectAudioAudioClips);
+
+            PlayEffect(startEffectAudioClip);
+            PlayMusic(inGameMusicAudioClip, startEffectAudioClip.length);
         }
 
-        public void PlayLoop(AudioClip audioClip)
+        public void PlayMusic(AudioClip audioClip, float delay = 0f)
         {
-            loopAudioSource.clip = audioClip;
-            loopAudioSource.Play();
+            musicAudioSource.loop = true;
+            musicAudioSource.clip = audioClip;
+
+            if (delay > 0f) {
+                musicAudioSource.PlayDelayed(delay);
+            } else {
+                musicAudioSource.Play();
+            }
         }
 
-        public void StopLoop()
+        public void StopMusic()
         {
-            loopAudioSource.Stop();
+            musicAudioSource.Stop();
         }
 
-        public void StopLoopAndPlay(AudioClip audioClip)
+        public void ChangeMusic(AudioClip audioClip)
         {
-            StopLoop();
-            PlayLoop(audioClip);
+            StopMusic();
+            PlayMusic(audioClip);
         }
 
         public void PlayEffect(AudioClip audioClip, float pitch = EFFECT_PITCH_DEFAULT)
@@ -121,11 +127,9 @@ namespace Tonhex
             PlayEffectRandomPitch(audioClips[randomIndex]);
         }
 
-        public void PlayEffectSequence(AudioClip[] audioClips)
+        public void PlayEffectSequence(AudioSequence audioSequence)
         {
-            PlayEffectRandomPitch(audioClips[currentAudioClipIndex]); // TODO
-
-            currentAudioClipIndex = (currentAudioClipIndex + 1) % audioClips.Length;
+            PlayEffectRandomPitch(audioSequence.GetCurrentAudioClip());
         }
 
     }
